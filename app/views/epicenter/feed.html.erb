@@ -1,0 +1,46 @@
+
+<div class="dashboard">
+	<div class="profile-card">
+		<div class="profile-card-background"></div>
+		<div class="profile-card-content">
+			<div class="profile-avatar-container">			
+				<%= link_to show_user_path(id: current_user.id) do %>
+					<%= image_tag profile_pic(current_user), class: "profile-avatar" %>
+				<% end %>
+			</div>
+			<div class="profile-card-user-fields">
+				<%= link_to current_user.name, show_user_path(id: current_user.id) %>
+				<%= link_to "@#{current_user.username}", show_user_path(id: current_user.id), class: 'smaller' %>
+			</div>
+			<div class="profile-card-stats">
+				<%= link_to show_user_path(id: current_user.id) do %>
+					Tweets<br>
+					<span class="stat-value"><%= @total_tweets %></span>
+				<% end %>
+				
+					Following<br>
+					
+					Followers<br>
+					
+				
+			</div>
+		</div>
+	</div>
+
+	<% suggest %>
+
+</div>
+
+
+<div class="main">
+	<div class="tweet-box container">
+
+		
+		
+	</div>
+
+	<% @following_tweets.each do |tweet| %>
+		<%= render '/tweets/tweet', tweet: tweet %>
+	<% end %>
+
+</div>

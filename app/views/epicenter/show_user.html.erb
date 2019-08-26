@@ -1,0 +1,31 @@
+<br><br><br>
+<div class="row"> 
+    <div class="col-md-3"> 
+        <div class="dashboard"> 
+            <h4>Name:</h4>
+            <p><%= @user.name %></p>
+            <h4>Location:</h4>
+            <p><%= @user.location %></p>
+            <h4>About:</h4>
+            <p><%= @user.bio %></p>
+        </div>
+    </div>
+    <div class="col-md-9"> 
+        <% unless current_user.id == @user.id %>
+            <% if current_user.following.include?(@user.id.to_s) %>
+                <%= link_to "Unfollow", unfollow_path(id: @user.id), class: 'btn btn-light', id: 'unfollow-btn' %>
+            <% else %>
+                <%= link_to "Follow", now_following_path(id: @user.id), class: 'btn btn-success' %>
+            <% end %>
+        <% end %>
+        <div class="main">    
+            <br><br><br>
+            <h3>Tweets:</h3>
+            <% @user.tweets.each do |tweet| %>
+                <!-- <p><%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %></p>
+                <p><%= tweet.message.html_safe %></p> -->
+                <%= render 'tweets/tweet', tweet: tweet %>
+            <% end %>
+        </div> 
+    </div>
+</div>
